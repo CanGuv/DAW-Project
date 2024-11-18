@@ -1,0 +1,70 @@
+/* about.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Styling for the main heading */
+h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-top: 20px;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #3498db;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    font-size: 1.1em;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure navbar links are aligned horizontally */
+.navbar a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.about-text{
+    text-align: center;
+    font-size: 1.6rem;
+    color: #555;
+    margin: 50px auto;
+    width: 80%;
+}
+
+img {
+    width: 350px; /* Set the width */
+    height: 400px; /* Set the height */
+    object-fit: cover; /* Ensures images are cropped proportionally */
+    margin: 10px; /* Add spacing between images */
+    display: inline-block; /* Keeps images inline */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow */
+}
