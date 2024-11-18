@@ -69,8 +69,8 @@ app.use('/dashboard', dashboardRoutes);
 const goalsRoutes = require('./routes/goals');
 app.use('/goals', goalsRoutes);
 
-const workoutsRoutes = require('./routes/workouts');
-app.use('/workouts', workoutsRoutes);
+const workoutsRoutes = require('./routes/workout');
+app.use('/workout', workoutsRoutes);
 
 const healthRoutes = require('./routes/health');
 app.use('/health', healthRoutes);

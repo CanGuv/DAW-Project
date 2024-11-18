@@ -64,4 +64,4 @@ CREATE TABLE Goals (
 );
 
 CREATE USER IF NOT EXISTS 'fitnesshealth_app'@'localhost' IDENTIFIED BY 'qwertyuiop'; 
-GRANT ALL PRIVILEGES ON bettys_books.* TO 'fitnesshealth_app'@'localhost';
+GRANT ALL PRIVILEGES ON fitnesshealth.* TO 'fitnesshealth_app'@'localhost';
