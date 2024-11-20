@@ -40,7 +40,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                     return next(err); // Handle hashing errors
                 }
                 // Store hashed password in your database.
-                let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
                 let data = [req.body.username, req.body.email, hashedPassword, req.body.age, req.body.gender, req.body.height, req.body.weight];
                 // Execute the query, passing in the user data
                 db.query(sqlquery, data, (err, results) => {

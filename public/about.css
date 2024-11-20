@@ -27,6 +27,33 @@ h1 {
 .navbar {
     display: flex;
     justify-content: center;
+    background-color: #3498db; /* You can adjust the color if needed */
+    padding: 15px 0; /* Matches the 'about.css' padding */
+    margin-bottom: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px; /* Matches the 'about.css' padding */
+    font-size: 1.1em; /* Matches the 'about.css' font-size */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #2980b9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure navbar links are aligned horizontally */
+.navbar a {
+    display: inline-block;
+    margin: 0 10px; /* Adjust margin to maintain consistent spacing */
+}
+
+/* .navbar {
+    display: flex;
+    justify-content: center;
     background-color: #3498db;
     padding: 15px 0;
     margin-bottom: 20px;
@@ -43,13 +70,13 @@ h1 {
 .navbar a:hover {
     background-color: #2980b9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Ensure navbar links are aligned horizontally */
-.navbar a {
+/* .navbar a {
     display: inline-block;
     margin: 0 10px;
-}
+} */
 
 .about-text{
     text-align: center;

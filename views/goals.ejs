@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Goals</title>
+        <link rel="stylesheet" type="text/css" href="/goals.css">
+    </head>
+    <body>
+        <h1>Goals</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="workout">Workouts</a>
+            <a href="health">Health</a>
+            <a href="auth/register">Register</a>
+            <a href="auth/login">Login</a>
+            <a href="dashboard">Dashboard</a>
+        </nav>
+
+        <p class="goals-text">Here you can view your goals and add new goals - seeing how you're progressing and what you need to work on.</p>
+
+        <h2>Your Goals</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Goal Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (goals.length > 0) { %>
+                    <% goals.forEach(goal => { %>
+                        <tr>
+                            <td><%= goal.goal_type %></td>
+                            <td><%= new Date(goal.start_date).toLocaleDateString() %></td>
+                            <td><%= new Date(goal.end_date).toLocaleDateString() %></td>
+                            <td><%= goal.status %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No goals found. Add a new goal below!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <h2>Add a new goal</h2>
+        <form method="POST" action="addgoal">
+            <p>Goal Type:
+                <select id="goaltype" name="goaltype" required>
+                    <option value="" disabled selected>Select your goal type</option>
+                    <option value="weightloss">Weight Loss</option>
+                    <option value="strength">Strength</option>
+                    <option value="endurance">Endurance</option>
+                    <option value="flexibility">Flexibility</option>
+                </select>
+            </p>
+            <p>Start Date:
+                <select id="startday" name="startday" required>
+                    <option value="" disabled selected>Day</option>
+                    <% for (let day = 1; day <= 31; day++) { %>
+                        <option value="<%= day %>"><%= day %></option>
+                    <% } %>
+                </select>
+                <select id="startmonth" name="startmonth" required>
+                    <option value="" disabled selected>Month</option>
+                    <% for (let month = 1; month <= 12; month++) { %>
+                        <option value="<%= month %>"><%= month %></option>
+                    <% } %>
+                </select>
+                <select id="startyear" name="startyear" required>
+                    <option value="" disabled selected>Year</option>
+                    <% for (let year = 2024; year >= 2020; year--) { %>
+                        <option value="<%= year %>"><%= year %></option>
+                    <% } %>
+                </select>
+            </p>
+            <p>End Date:
+                <select id="endday" name="endday" required>
+                    <option value="" disabled selected>Day</option>
+                    <% for (let day = 1; day <= 31; day++) { %>
+                        <option value="<%= day %>"><%= day %></option>
+                    <% } %>
+                </select>
+                <select id="endmonth" name="endmonth" required>
+                    <option value="" disabled selected>Month</option>
+                    <% for (let month = 1; month <= 12; month++) { %>
+                        <option value="<%= month %>"><%= month %></option>
+                    <% } %>
+                </select>
+                <select id="endyear" name="endyear" required>
+                    <option value="" disabled selected>Year</option>
+                    <% for (let year = 2024; year <= 2035; year++) { %>
+                        <option value="<%= year %>"><%= year %></option>
+                    <% } %>
+                </select>
+            </p>
+            <p>Status:
+                <select id="status" name="status" required>
+                    <option value="" disabled selected>Status</option>
+                    <option value="weightloss">In Progress</option>
+                    <option value="strength">Completed</option>
+                    <option value="endurance">Failed</option>
+                </select>
+            </p>
+            <input type="submit" value="Add" />
+          </form>
+    </body>
+</html>

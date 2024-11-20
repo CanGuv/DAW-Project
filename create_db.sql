@@ -56,7 +56,6 @@ CREATE TABLE Goals (
     goal_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     goal_type ENUM('Weight Loss', 'Strength', 'Endurance', 'Flexibility'),
-    target_value DECIMAL(5,2),
     start_date DATE,
     end_date DATE,
     status ENUM('In Progress', 'Completed', 'Failed') DEFAULT 'In Progress',
