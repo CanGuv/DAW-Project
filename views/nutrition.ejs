@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nutrition</title>
+        <link rel="stylesheet" type="text/css" href="/nutrition.css">
+    </head>
+    <body>
+        <h1>Nutrition</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/workout">Workouts</a>
+            <a href="/goals">Goals</a>
+            <a href="/auth/login">Login</a>
+            <a href="register">Register</a>
+            <a href="dashboard">Dashboard</a>
+        </nav>
+
+        <form method="GET" action="nutrition">
+            <label for="ingredient">Enter Ingredient:</label>
+            <input type="text" id="ingredient" name="ingr" required>
+            <button type="submit">Get Nutrition</button>
+        </form>
+
+        <% if (typeof nutrition !== 'undefined') { %>
+            <h2>Nutrition Information for: <%= ingr %></h2>
+
+            <% if (nutrition.error) { %>
+                <p>Error: <%= nutrition.error %></p>
+            <% } else { %>
+                <h3>Nutrition Details</h3>
+                <p>Calories: <%= nutrition.calories %></p>
+                <p>Total Weight: <%= nutrition.totalWeight %> grams</p>
+
+                <h4>Macronutrients:</h4>
+                <ul>
+                    <% for (const nutrient in nutrition.totalNutrients) { %>
+                        <li><%= nutrient %>: <%= nutrition.totalNutrients[nutrient].quantity %> <%= nutrition.totalNutrients[nutrient].unit %></li>
+                    <% } %>
+                </ul>
+            <% } %>
+        <% } %>
+    </body>
+</html>

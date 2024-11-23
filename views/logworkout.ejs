@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Workouts</title>
+        <link rel="stylesheet" type="text/css" href="/goals.css">
+    </head>
+    <body>
+        <h1>Workouts</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/goals">Goals</a>
+            <a href="/health/nutrition">Health</a>
+            <a href="auth/register">Register</a>
+            <a href="auth/login">Login</a>
+            <a href="dashboard">Dashboard</a>
+        </nav>
+
+        <p class="goals-text">Here you can view your workouts and log your new workouts.</p>
+
+        <h2>Your Goals</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Workout Type</th>
+                    <th>Duration (minutes)</th>
+                    <th>Intensity</th>
+                    <th>Calories burned</th>
+                    <th>Date</th>
+                    <th>Exercise name</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Weight (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (workouts.length > 0) { %>
+                    <% workouts.forEach(workout => { %>
+                        <tr>
+                            <td><%= workout.workout_type %></td>
+                            <td><%= workout.duration_minutes %></td>
+                            <td><%= workout.intensity %></td>
+                            <td><%= workout.calories_burned %></td>
+                            <td><%= new Date(workout.workout_date).toLocaleDateString() %></td>
+                            <td><%= workout.exercise_name %></td>
+                            <td><%= workout.sets %></td>
+                            <td><%= workout.reps %></td>
+                            <td><%= workout.weight_kg %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No workouts found. Add a new new workout below!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <h2>Log your workout</h2>
+        <form method="POST" action="log">
+            <p>Workout Type: <input type="text" name="workout_type"/></p>
+
+            <p>Duration (Minutes): <input type="number" name="duration_minutes"/></p>
+
+            <p>Intensity:
+                <select name="intensity">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </p>
+
+            <p>Calories Burned: <input type="text" name="calories_burned"/></p>
+
+            <p>Workout Date:
+                <select id="workoutday" name="workoutday" required>
+                    <option value="" disabled selected>Day</option>
+                    <% for (let day = 1; day <= 31; day++) { %>
+                        <option value="<%= day %>"><%= day %></option>
+                    <% } %>
+                </select>
+                <select id="workoutmonth" name="workout" required>
+                    <option value="" disabled selected>Month</option>
+                    <% for (let month = 1; month <= 12; month++) { %>
+                        <option value="<%= month %>"><%= month %></option>
+                    <% } %>
+                </select>
+                <select id="workoutyear" name="workoutyear" required>
+                    <option value="" disabled selected>Year</option>
+                    <% for (let year = 2024; year >= 2020; year--) { %>
+                        <option value="<%= year %>"><%= year %></option>
+                    <% } %>
+                </select>
+            </p>
+
+            <h2>Exercises</h2>
+            <p>Name: <input type="text" name="exercisename"/></p>
+            <p>Sets: <input type="text" name="sets"/></p>
+            <p>Reps: <input type="text" name="reps"/></p>
+            <p>Weight (kg): <input type="text" name="weight-kg"/></p>
+
+            <input type="submit" value="Add" />
+          </form>
+    </body>
+</html>

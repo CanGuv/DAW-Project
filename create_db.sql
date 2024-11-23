@@ -32,15 +32,27 @@ CREATE TABLE Exercises (
 );
 
 CREATE TABLE Workout_Exercises (
-    workout_id INT,
-    exercise_id INT,
+    workout_id INT NOT NULL,
+    exercise_id INT NOT NULL AUTO_INCREMENT,
+    exercise_name VARCHAR(255),
     sets INT,
     reps INT,
-    weight_kg DECIMAL(5,2),
-    PRIMARY KEY (workout_id, exercise_id),
-    FOREIGN KEY (workout_id) REFERENCES Workouts(workout_id) ON DELETE CASCADE,
-    FOREIGN KEY (exercise_id) REFERENCES Exercises(exercise_id) ON DELETE CASCADE
+    weight_kg DECIMAL(5, 2),
+    PRIMARY KEY (exercise_id),
+    FOREIGN KEY (workout_id) REFERENCES Workouts(workout_id)
 );
+
+
+-- CREATE TABLE Workout_Exercises (
+--     workout_id INT,
+--     exercise_id INT,
+--     sets INT,
+--     reps INT,
+--     weight_kg DECIMAL(5,2),
+--     PRIMARY KEY (workout_id, exercise_id),
+--     FOREIGN KEY (workout_id) REFERENCES Workouts(workout_id) ON DELETE CASCADE,
+--     FOREIGN KEY (exercise_id) REFERENCES Exercises(exercise_id) ON DELETE CASCADE
+-- );
 
 CREATE TABLE Health_Metrics (
     metric_id INT AUTO_INCREMENT PRIMARY KEY,
