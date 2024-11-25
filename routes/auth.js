@@ -92,8 +92,13 @@ router.post('/loggedin', function (req, res, next){
     })
 })
 
-router.get('/logout', function (req, res){
-
+router.get('/logout', function (req, res) {
+    req.session.destroy(err => {
+        if (err) {
+          return res.send("eroor in destroying session")
+        }
+        res.redirect("/")
+    })
 })
 
 module.exports = router

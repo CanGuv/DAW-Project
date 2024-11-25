@@ -12,10 +12,11 @@
             <a href="/workout">Workouts</a>
             <a href="/goals">Goals</a>
             <% if (!user) { %>
-            <a href="/auth/login">Login</a>
-            <a href="/auth/register">Register</a>
+                <a href="/auth/login">Login</a>
+                <a href="/auth/register">Register</a>
             <% } else { %>
-            <a href="dashboard">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/auth/logout">Logout</a>
             <% } %>
         </nav>
 
