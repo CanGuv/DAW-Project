@@ -83,7 +83,7 @@ router.post('/loggedin', function (req, res, next){
             else if (result === true) {
                 req.session.userId = username
                 // res.send('Login successful!');
-                res.redirect('/')
+                res.redirect('/dashboard')
             }
             else {
                 res.status(401).send('Invalid password');

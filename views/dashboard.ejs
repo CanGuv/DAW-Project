@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="/goals.css">
+    </head>
+    <body>
+        <h1>Dashboard</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="workout">Workouts</a>
+            <a href="health/nutrition">Health</a>
+            <a href="goals">Goals</a>
+        </nav>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Workout Type</th>
+                    <th>Duration (minutes)</th>
+                    <th>Intensity</th>
+                    <th>Calories burned</th>
+                    <th>Date</th>
+                    <th>Exercise name</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Weight (kg)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (workouts.length > 0) { %>
+                    let lastThreeWorkouts = workouts.slice(-3);
+                    <% lastThreeWorkouts.forEach(workout => { %>
+                        <tr>
+                            <td><%= workout.workout_type %></td>
+                            <td><%= workout.duration_minutes %></td>
+                            <td><%= workout.intensity %></td>
+                            <td><%= workout.calories_burned %></td>
+                            <td><%= new Date(workout.workout_date).toLocaleDateString() %></td>
+                            <td><%= workout.exercise_name %></td>
+                            <td><%= workout.sets %></td>
+                            <td><%= workout.reps %></td>
+                            <td><%= workout.weight_kg %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No workouts found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Goal Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (goals.length > 0) { %>
+                    let lastThreeGoals = goals.slice(-3);
+                    <% lastThreeGoals.forEach(goal => { %>
+                        <tr>
+                            <td><%= goal.goal_type %></td>
+                            <td><%= new Date(goal.start_date).toLocaleDateString() %></td>
+                            <td><%= new Date(goal.end_date).toLocaleDateString() %></td>
+                            <td><%= goal.status %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No goals found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>
