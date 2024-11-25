@@ -81,35 +81,99 @@
             </tbody>
         </table>
 
-        <div class="chart-container" style="position: relative; height:40vh; width:80vw; margin-left: 5vw; margin-top: 5vh">
-            <canvas id="goalsChart" width="100" height="100"></canvas>
+        <!-- <div class="chart-container" style="position: relative; height:40vh; width:80vw; margin-left: 5vw; margin-top: 5vh">
+            <canvas id="goalsChart"></canvas>
+        </div> -->
+
+        <div class="chart-container" style="display: flex; justify-content: space-around; align-items: center; margin-top: 3vh;">
+            <div style="flex: 1; text-align: center; height:40vh; width:80vw; margin-left: 10vw">
+                <canvas id="goalsChart"></canvas>
+            </div>
+
+            <script>
+                // Data for Goals Pie Chart
+                const goalsData = <%- JSON.stringify(goals) %>;
+        
+                // Categorize goals by status
+                const goalCounts = {
+                    completed: goalsData.filter(g => g.status === 'Completed').length,
+                    inProgress: goalsData.filter(g => g.status === 'In Progress').length,
+                    failed: goalsData.filter(g => g.status === 'Failed').length,
+                };
+
+                console.log(goalCounts);
+        
+                new Chart(document.getElementById('goalsChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Completed', 'In Progress', 'Failed'],
+                        datasets: [{
+                            label: 'Goals Status',
+                            data: [goalCounts.completed, goalCounts.inProgress, goalCounts.failed],
+                            backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
+                        }]
+                    }
+                });
+            </script>
+
+            <!-- <div class="bar-container" style="position: relative; height:40vh; width:80vw; margin-left: 45vw">
+                <canvas id="workoutChart"></canvas>
+            </div> -->
+
+            <div style="flex: 1; text-align: center; height:40vh; width:80vw; margin-right: 10vw">
+                <canvas id="workoutChart"></canvas>
+            </div>
+
+            <script>
+                const workoutData = <%- JSON.stringify(workouts) %>;
+
+                const uniqueWorkoutDates = new Set();
+
+                workoutData.forEach(workout => {
+                    uniqueWorkoutDates.add(workout.workout_date);
+                });
+
+                const monthlyWorkoutCounts = Array(12).fill(0);
+                uniqueWorkoutDates.forEach(date => {
+                    const month = new Date(date).getMonth();
+                    monthlyWorkoutCounts[month] += 1;
+                });
+
+                const monthLabels = ["January", "February", "March", "April", "May", "June", 
+                "July", "August", "September", "October", "November", "December"
+                ];
+
+                const barColours = ["red","green","blue","orange","brown","purple","yellow","pink","cyan","magenta","teal","lime"];
+
+                new Chart(document.getElementById("workoutChart"), {
+                    type: "bar",
+                    data: {
+                        labels: monthLabels,
+                        datasets: [{
+                            label: "Workout Days Per Month",
+                            data: monthlyWorkoutCounts,
+                            backgroundColor: barColours
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Months"
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: "Number of Days Worked Out"
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
         </div>
-
-        <script>
-            // Data for Goals Pie Chart
-            const goalsData = <%- JSON.stringify(goals) %>;
-    
-            // Categorize goals by status
-            const goalCounts = {
-                completed: goalsData.filter(g => g.status === 'Completed').length,
-                inProgress: goalsData.filter(g => g.status === 'In Progress').length,
-                failed: goalsData.filter(g => g.status === 'Failed').length,
-            };
-
-            console.log(goalCounts);
-    
-            new Chart(document.getElementById('goalsChart'), {
-                type: 'pie',
-                data: {
-                    labels: ['Completed', 'In Progress', 'Failed'],
-                    datasets: [{
-                        label: 'Goals Status',
-                        data: [goalCounts.completed, goalCounts.inProgress, goalCounts.failed],
-                        backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
-                    }]
-                }
-            });
-        </script>
-
     </body>
 </html>
