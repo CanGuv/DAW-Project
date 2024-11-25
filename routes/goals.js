@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
         if (err) {
             next(err)
         }
+
         // Pass the goals data to the EJS template
         res.render("goals.ejs", { goals: results, user: userId})
     });

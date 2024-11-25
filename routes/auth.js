@@ -62,7 +62,7 @@ router.get('/login', function (req, res){
 router.post('/loggedin', function (req, res, next){
     const { username, password } = req.body;
 
-    let sqlquery = "SELECT password_hash FROM Users WHERE username = ?"; 
+    let sqlquery = "SELECT password_hash, user_id FROM Users WHERE username = ?"; 
 
     db.query(sqlquery, [username], (err, results) => {
 
@@ -81,7 +81,7 @@ router.post('/loggedin', function (req, res, next){
                 return res.status(500).send('Error during password comparison');
             }
             else if (result === true) {
-                req.session.userId = username
+                req.session.userId = results[0].user_id
                 // res.send('Login successful!');
                 res.redirect('/dashboard')
             }
