@@ -48,7 +48,8 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                         return next(err); // Handle database errors
                     }
 
-                    res.send('You are all set up!')
+                    // res.send('You are all set up!')
+                    res.redirect('/login')
                 });
             })
         }
@@ -80,8 +81,9 @@ router.post('/loggedin', function (req, res, next){
                 return res.status(500).send('Error during password comparison');
             }
             else if (result === true) {
-                req.session.userId = req.body.username;
-                res.send('Login successful!');
+                req.session.userId = username
+                // res.send('Login successful!');
+                res.redirect('/')
             }
             else {
                 res.status(401).send('Invalid password');

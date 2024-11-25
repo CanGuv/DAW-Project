@@ -11,9 +11,12 @@
             <a href="/about">About</a>
             <a href="/goals">Goals</a>
             <a href="/health/nutrition">Health</a>
-            <a href="auth/register">Register</a>
-            <a href="auth/login">Login</a>
-            <a href="dashboard">Dashboard</a>
+            <% if (!user) { %>
+                <a href="auth/register">Register</a>
+                <a href="auth/login">Login</a>
+            <% } else { %>
+                <a href="dashboard">Dashboard</a>
+            <% } %>
         </nav>
 
         <p class="goals-text">Here you can view your workouts and log your new workouts.</p>

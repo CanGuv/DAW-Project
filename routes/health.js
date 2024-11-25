@@ -16,7 +16,7 @@ router.get('/nutrition', function (req, res, next) {
             // Parse the response and extract the necessary data
             let nutrition = JSON.parse(body);
             
-            res.render('nutrition', { nutrition: nutrition, ingr: ingr });
+            res.render('nutrition', { nutrition: nutrition, ingr: ingr, user: req.session.userId });
         }
     });
 });

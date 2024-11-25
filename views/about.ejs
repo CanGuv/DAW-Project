@@ -11,9 +11,12 @@
             <a href="workout">Workouts</a>
             <a href="health/nutrition">Health</a>
             <a href="goals">Goals</a>
-            <a href="auth/register">Register</a>
-            <a href="auth/login">Login</a>
-            <a href="dashboard">Dashboard</a>
+            <% if (!user) { %>
+                <a href="auth/login">Login</a>
+                <a href="auth/register">Register</a>
+            <% } else { %>
+                <a href="dashboard">Dashboard</a>
+            <% } %>
         </nav>
 
         <p class="about-text"> Welcome to <%=fitnessData.mainName%>, your ultimate fitness companion! 

@@ -10,8 +10,11 @@
         <p><a href="workout">Your workouts</a></p>
         <p><a href="health/nutrition">Track your health</a></p>
         <p><a href="goals">Set some goals</a></p>
-        <p><a href="auth/register">Register</a></p>
-        <p><a href="auth/login">Login</a></p>
-        <p><a href="dashboard">Dashboard</a></p>
+        <% if (!user) { %>
+            <p><a href="auth/register">Register</a></p>
+            <p><a href="auth/login">Login</a></p>
+        <% } else { %>
+            <p><a href="dashboard">Dashboard</a></p>
+        <% } %>
     </body>
 </html>

@@ -2,7 +2,7 @@
 const express = require("express")
 const router = express.Router()
 
-router.get('/', async (req, res, next) => {
+router.get('/', function (req, res, next) {
     let userId = req.session.userId
     let sqlQuery = "SELECT * FROM Goals WHERE user_id = ?"
 
@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
             next(err)
         }
         // Pass the goals data to the EJS template
-        res.render("goals.ejs", { goals: results })
+        res.render("goals.ejs", { goals: results, user: userId})
     });
 });
 

@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
             return next(err)
         }
         // Pass the goals data to the EJS template
-        res.render("logworkout", { workouts: results })
+        res.render("logworkout", { workouts: results, user: userId })
     });
 });
 
