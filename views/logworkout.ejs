@@ -61,13 +61,13 @@
         </table>
 
         <h2>Log your workout</h2>
-        <form method="POST" action="log">
-            <p>Workout Type: <input type="text" name="workout_type"/></p>
+        <form method="POST" action="/workout/log">
+            <p>Workout Type: <input type="text" name="workout_type" required/></p>
 
-            <p>Duration (Minutes): <input type="number" name="duration_minutes"/></p>
+            <p>Duration (Minutes): <input type="number" name="duration_minutes" required/></p>
 
             <p>Intensity:
-                <select name="intensity">
+                <select name="intensity" required>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
@@ -98,12 +98,13 @@
             </p>
 
             <h2>Exercises</h2>
-            <p>Name: <input type="text" name="exercisename"/></p>
-            <p>Sets: <input type="text" name="sets"/></p>
-            <p>Reps: <input type="text" name="reps"/></p>
-            <p>Weight (kg): <input type="text" name="weight-kg"/></p>
+            <p>Name: <input type="text" name="exercisename" required/></p>
+            <p>Sets: <input type="text" name="sets" required/></p>
+            <p>Reps: <input type="text" name="reps" required/></p>
+            <p>Weight (kg): <input type="text" name="weight-kg" required/></p>
 
             <input type="submit" value="Add" />
+
           </form>
     </body>
 </html>

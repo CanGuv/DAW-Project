@@ -1,6 +1,13 @@
-// const { render } = require("ejs");
 const express = require("express")
 const router = express.Router()
+
+const redirectLogin = (req, res, next) => {
+    if (!req.session.userId ) {
+      res.redirect('/auth/login') // redirect to the login page
+    } else { 
+        next (); // move to the next middleware function
+    } 
+}
 
 router.get('/', function (req, res, next) {
     let userId = req.session.userId
@@ -16,8 +23,9 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.post('/addgoal', async (req, res) => {
+router.post('/addgoal', redirectLogin, function (req, res) {
     let userId = req.session.userId
+
     let sqlquery = "INSERT INTO goals (user_id, goal_type, start_date, end_date, status) VALUES (?, ?, ?, ?, ?)"
 
     let data = [userId, req.body.goaltype, req.body.startyear + "-" + req.body.startmonth + "-" + req.body.startday, 

@@ -2,8 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/api", function(req, res, next){
-    // Query database to get all the books
-    let sqlquery = "SELECT * FROM Exercises"
+    let sqlquery = "SELECT DISTINCT LOWER(exercise_name) AS exercise_name FROM Workout_Exercises;"
 
     // Execute the sql query
     db.query(sqlquery, (err, result) => {

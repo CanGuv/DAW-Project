@@ -75,5 +75,8 @@ app.use('/workout', workoutsRoutes);
 const healthRoutes = require('./routes/health');
 app.use('/health', healthRoutes);
 
+const myapiRoutes = require('./routes/myapi');
+app.use('/myapi', myapiRoutes);
+
 // Start the web app listening
 app.listen(port, () => console.log(`Node app listening on port ${port}!`))

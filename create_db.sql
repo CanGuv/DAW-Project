@@ -42,28 +42,6 @@ CREATE TABLE Workout_Exercises (
     FOREIGN KEY (workout_id) REFERENCES Workouts(workout_id)
 );
 
-
--- CREATE TABLE Workout_Exercises (
---     workout_id INT,
---     exercise_id INT,
---     sets INT,
---     reps INT,
---     weight_kg DECIMAL(5,2),
---     PRIMARY KEY (workout_id, exercise_id),
---     FOREIGN KEY (workout_id) REFERENCES Workouts(workout_id) ON DELETE CASCADE,
---     FOREIGN KEY (exercise_id) REFERENCES Exercises(exercise_id) ON DELETE CASCADE
--- );
-
-CREATE TABLE Health_Metrics (
-    metric_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    weight_kg DECIMAL(5,2),
-    body_fat_percentage DECIMAL(5,2),
-    muscle_mass_kg DECIMAL(5,2),
-    metric_date DATE,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
-);
-
 CREATE TABLE Goals (
     goal_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
