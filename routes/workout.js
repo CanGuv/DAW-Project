@@ -50,4 +50,23 @@ router.post('/log', redirectLogin, function (req, res, next)  {
     });
 });
 
+router.get('/search',function(req, res, next){
+    let userId = req.session.userId
+    res.render("search.ejs", {user: userId})
+})
+
+router.get('/search_result', redirectLogin, function (req, res, next) {
+    let userId = req.session.userId
+    let workoutType = req.query.workoutType.toLowerCase()
+    let sqlQuery = "SELECT w.workout_type, we.exercise_name FROM Workouts w JOIN Workout_Exercises we ON w.workout_id = we.workout_id WHERE w.user_id = ? AND LOWER(w.workout_type) = ?"
+
+    db.query(sqlQuery, [userId, workoutType], (err, results) => {
+        if (err) {
+            return next(err)
+        }
+        // Pass the goals data to the EJS template
+        res.render("list", { workoutexercises: results, user: userId })
+    });
+})
+
 module.exports = router;

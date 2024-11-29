@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Results</title>
+        <link rel="stylesheet" type="text/css" href="/goals.css">
+    </head>
+    <body>
+        <h1>Search results</h1>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/workout">Workouts</a>
+            <a href="/workout/search">Search</a>
+            <a href="/goals">Goals</a>
+            <a href="/health/nutrition">Nutrition</a>
+            <a href="dashboard">Dashboard</a>
+            <a href="auth/logout">Logout</a>
+        </nav>
+
+        <p class="goals-text">Here you can view exercises for the workout type you've searched for</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Workout type</th>
+                    <th>Exercise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (workoutexercises.length > 0) { %>
+                    <% workoutexercises.forEach(we => { %>
+                        <tr>
+                            <td><%= we.workout_type %></td>
+                            <td><%= we.exercise_name %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">No goals found. Add a new goal below!</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+
+    </body>
+</html>
