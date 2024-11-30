@@ -1,7 +1,7 @@
 # Databases and Web project
 
 ## Description
-This is a web application I created for my 'Databases and the web'. It is an application created primarily using Node.js and MySQL - 
+This is a web application I created for my 'Databases and the web' module. It is an application created primarily using Node.js and MySQL - 
 it a fitness and health tracking application, where users can log their workouts and exercises, set goals and retrieve nutritional information on food.
 
 ## Features
