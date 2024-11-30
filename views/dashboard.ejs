@@ -82,10 +82,6 @@
             </tbody>
         </table>
 
-        <!-- <div class="chart-container" style="position: relative; height:40vh; width:80vw; margin-left: 5vw; margin-top: 5vh">
-            <canvas id="goalsChart"></canvas>
-        </div> -->
-
         <div class="chart-container" style="display: flex; justify-content: space-around; align-items: center; margin-top: 3vh;">
             <div style="flex: 1; text-align: center; height:40vh; width:80vw; margin-left: 10vw">
                 <canvas id="goalsChart"></canvas>
@@ -102,8 +98,7 @@
                     failed: goalsData.filter(g => g.status === 'Failed').length,
                 };
 
-                console.log(goalCounts);
-        
+                // Create Pie Chart
                 new Chart(document.getElementById('goalsChart'), {
                     type: 'pie',
                     data: {
@@ -117,35 +112,38 @@
                 });
             </script>
 
-            <!-- <div class="bar-container" style="position: relative; height:40vh; width:80vw; margin-left: 45vw">
-                <canvas id="workoutChart"></canvas>
-            </div> -->
-
             <div style="flex: 1; text-align: center; height:40vh; width:80vw; margin-right: 10vw">
                 <canvas id="workoutChart"></canvas>
             </div>
 
             <script>
+                // Data for Workout Pie Chart
                 const workoutData = <%- JSON.stringify(workouts) %>;
 
+                // Create set to store unique workout dates
                 const uniqueWorkoutDates = new Set();
 
+                // Populate set with workout dates
                 workoutData.forEach(workout => {
                     uniqueWorkoutDates.add(workout.workout_date);
                 });
 
+                // Create array of months, incrememnting by 1 for every workout for each month
                 const monthlyWorkoutCounts = Array(12).fill(0);
                 uniqueWorkoutDates.forEach(date => {
                     const month = new Date(date).getMonth();
                     monthlyWorkoutCounts[month] += 1;
                 });
-
+                
+                // Create array of months
                 const monthLabels = ["January", "February", "March", "April", "May", "June", 
                 "July", "August", "September", "October", "November", "December"
                 ];
 
+                // Create array of colours
                 const barColours = ["red","green","blue","orange","brown","purple","yellow","pink","cyan","magenta","teal","lime"];
 
+                // Create Bar Chart
                 new Chart(document.getElementById("workoutChart"), {
                     type: "bar",
                     data: {

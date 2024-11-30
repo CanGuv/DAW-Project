@@ -1,4 +1,6 @@
+// Import the Express framework
 const express = require("express")
+// Create a new router instance
 const router = express.Router()
 
 router.get('/',function(req, res){

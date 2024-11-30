@@ -52,7 +52,7 @@ db.connect((err) => {
 })
 global.db = db
 
-// Define our application-specific data
+// Define application-specific data
 app.locals.fitnessData = {mainName: "Fitness and Health Tracker"}
 
 app.use(expressSanitizer());
