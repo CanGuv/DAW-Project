@@ -41,14 +41,14 @@ it is a fitness and health tracking application, where users can log their worko
 4. Set up the database
    
    Run the SQL Files, open MySQL from the command line and log in using the following command:
-  ```bash
-  mysql -u root -p
-  ```
+   ```bash
+   mysql -u root -p
+   ```
    Once logged in, run the following commands to create the database and insert sample data:
-  ```bash
-  SOURCE /path/to/create_db.sql;
-  SOURCE /path/to/insert_data.sql;
-  ```
+   ```bash
+   SOURCE /path/to/create_db.sql;
+   SOURCE /path/to/insert_data.sql;
+   ```
 5. Run application
    ```bash
    node index.js
