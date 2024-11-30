@@ -39,11 +39,11 @@ it is a fitness and health tracking application, where users can log their worko
    npm install
    ```
 4. Set up the Database
-  Run the SQL Files, open MySQL from the command line and log in using the following command:
+   Run the SQL Files, open MySQL from the command line and log in using the following command:
   ```bash
   mysql -u root -p
   ```
-  Once logged in, run the following commands to create the database and insert sample data:
+   Once logged in, run the following commands to create the database and insert sample data:
   ```bash
   SOURCE /path/to/create_db.sql;
   SOURCE /path/to/insert_data.sql;
