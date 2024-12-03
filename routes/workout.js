@@ -82,7 +82,7 @@ router.get('/search_result', redirectLogin, function (req, res, next) {
         if (err) {
             return next(err)
         }
-        res.render("list", { workoutexercises: results, user: userId })
+        res.render("list", { workoutexercises: results, user: userId, typesearched: workoutType })
     });
 })
 
