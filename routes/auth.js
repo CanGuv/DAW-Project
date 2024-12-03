@@ -42,26 +42,40 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
         else { 
             const plainPassword = req.body.password
 
-            // Hash the user's password
-            bcrypt.hash(plainPassword, saltRounds, function(err, hashedPassword) {
+            // Check if username is already in the database
+            const usernameCheck = 'SELECT COUNT(*) AS count FROM users WHERE username = ?';
+
+            db.query(usernameCheckQuery, [req.body.username], (err, results) => {
                 if (err) {
                     return next(err);
                 }
+    
+                if (results[0].count > 0) {
+                    // If username already exists, user should pick another
+                    return res.status(400).send('Username already exists. Please pick another one.');
+                }
 
-                // SQL to insert data
-                let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-
-                // Get the data from the request body
-                let data = [req.body.username, req.body.email, hashedPassword, req.body.age, req.body.gender, req.body.height, req.body.weight];
-
-                // Execute the query and handle the result
-                db.query(sqlquery, data, (err, results) => {
+                // Hash the user's password
+                bcrypt.hash(plainPassword, saltRounds, function(err, hashedPassword) {
                     if (err) {
                         return next(err);
                     }
 
-                    res.redirect('/login')
-                });
+                    // SQL to insert data
+                    let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+                    // Get the data from the request body
+                    let data = [req.body.username, req.body.email, hashedPassword, req.body.age, req.body.gender, req.body.height, req.body.weight];
+
+                    // Execute the query and handle the result
+                    db.query(sqlquery, data, (err, results) => {
+                        if (err) {
+                            return next(err);
+                        }
+
+                        res.redirect('/login')
+                    });
+                })
             })
         }
     })

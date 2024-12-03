@@ -3,6 +3,9 @@ const express = require("express")
 // Create a new router instance
 const router = express.Router()
 
+// Import the express-validator
+const { check, validationResult } = require('express-validator')
+
 // Middleware function to redirect users to login
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
@@ -32,33 +35,43 @@ router.post('/log', redirectLogin, function (req, res, next)  {
     // Get userID from session
     let userId = req.session.userId
 
-    // Get the data from the request body
-    let { workout_type, duration_minutes, intensity, calories_burned, workoutday, workoutmonth, workoutyear, exercisename, sets, reps, weight_kg } = req.body;
-    
-    // Formatting of Date
-    let workout_date = workoutyear + "-" + workoutmonth + "-" + workoutday
+    // Sabitize body
+    req.body = req.sanitize(req.body)
 
-    // SQL query to insert data
-    let workoutInsertQuery = "INSERT INTO Workouts (user_id, workout_type, duration_minutes, intensity, calories_burned, workout_date) VALUES (?, ?, ?, ?, ?, ?)"
+    // Validate the sanitized input and handle errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.redirect('/log'); }
+    else { 
 
-    // Execute the query and handle the result
-    db.query(workoutInsertQuery, [userId, workout_type, duration_minutes, intensity, calories_burned, workout_date], (err, result) => {
-        if (err) {
-            return next(err)
-        }
+        // Get the data from the request body
+        let { workout_type, duration_minutes, intensity, calories_burned, workoutday, workoutmonth, workoutyear, exercisename, sets, reps, weight_kg } = req.body;
+        
+        // Formatting of Date
+        let workout_date = workoutyear + "-" + workoutmonth + "-" + workoutday
 
-        let workoutId = result.insertId;
+        // SQL query to insert data
+        let workoutInsertQuery = "INSERT INTO Workouts (user_id, workout_type, duration_minutes, intensity, calories_burned, workout_date) VALUES (?, ?, ?, ?, ?, ?)"
 
-        let exerciseInsertQuery = "INSERT INTO WorkoutExercises (workout_id, exercise_name, sets, reps, weight_kg) VALUES (?, ?, ?, ?)"
-
-        db.query(exerciseInsertQuery, [workoutId, exercisename, sets, reps, weight_kg], (err, result) => {
+        // Execute the query and handle the result
+        db.query(workoutInsertQuery, [userId, workout_type, duration_minutes, intensity, calories_burned, workout_date], (err, result) => {
             if (err) {
                 return next(err)
             }
 
-            res.redirect('/workout');
+            let workoutId = result.insertId;
+
+            let exerciseInsertQuery = "INSERT INTO WorkoutExercises (workout_id, exercise_name, sets, reps, weight_kg) VALUES (?, ?, ?, ?)"
+
+            db.query(exerciseInsertQuery, [workoutId, exercisename, sets, reps, weight_kg], (err, result) => {
+                if (err) {
+                    return next(err)
+                }
+
+                res.redirect('/workout');
+            });
         });
-    });
+    }
 });
 
 router.get('/search',function(req, res, next){
