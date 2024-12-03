@@ -113,7 +113,7 @@ router.get('/logout', function (req, res) {
     // Destroy the user's session
     req.session.destroy(err => {
         if (err) {
-          return res.send("eroor in destroying session")
+          return res.send("error in destroying session")
         }
         res.redirect("/")
     })
