@@ -22,7 +22,8 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
     .matches(/[A-Z]/).withMessage('Password must have at least 1 capital letter')
     .matches(/\d/).withMessage('Password must have at least 1 number')
     .matches(/[@$!%*?&]/).withMessage('Password must have at least 1 symbol')
-    .notEmpty().withMessage('Password is required'), 
+    .notEmpty().withMessage('Password is required'),
+    check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('Passwords do not match'), 
     check('age').isInt().withMessage('Enter a valid number').notEmpty().withMessage('Age is required'), 
     check('height').isFloat().withMessage('Enter a valid number').notEmpty().withMessage('Height is required'),  
     check('weight').isFloat().withMessage('Enter a valid number').notEmpty().withMessage('Weight is required'),
