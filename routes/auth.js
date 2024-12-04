@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10 // Number of salt rounds for password hashing
 
 router.get('/register', function (req, res) {
-    res.render('register.ejs')                                                               
+    res.render('register.ejs', { message: ''} )                                                               
 })
 
 // Route handler to process user registration with validation rules
@@ -38,21 +38,26 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
         // Validate the sanitized input and handle errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/register'); }
+            // Extract error messages
+            const errorMessages = errors.array().map(err => err.msg);
+        
+            // Render the register page with the errors
+            return res.render('register.ejs', { message: errorMessages });
+        }
         else { 
             const plainPassword = req.body.password
 
             // Check if username is already in the database
             const usernameCheck = 'SELECT COUNT(*) AS count FROM users WHERE username = ?';
 
-            db.query(usernameCheckQuery, [req.body.username], (err, results) => {
+            db.query(usernameCheck, [req.body.username], (err, results) => {
                 if (err) {
                     return next(err);
                 }
     
                 if (results[0].count > 0) {
-                    // If username already exists, user should pick another
-                    return res.status(400).send('Username already exists. Please pick another one.');
+                    // If username already exists, show error message
+                    return res.render('register.ejs', { message: ['Username already exists. Please pick another one'] });
                 }
 
                 // Hash the user's password
@@ -73,7 +78,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                             return next(err);
                         }
 
-                        res.redirect('/login')
+                        res.redirect('/auth/login')
                     });
                 })
             })
@@ -81,7 +86,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
     })
 
 router.get('/login', function (req, res){
-    res.render('login.ejs')
+    res.render('login.ejs', { message: ''} )
 })
 
 router.post('/loggedin', function (req, res, next){
@@ -100,7 +105,7 @@ router.post('/loggedin', function (req, res, next){
 
         // Check if the username exists in the database
         if (results.length === 0) {
-            return res.status(401).send('User not found');
+            return res.render('login.ejs', { message: ['Username or Password is incorrect'] });
         }
 
         // Retrieve the hashed password
@@ -117,7 +122,8 @@ router.post('/loggedin', function (req, res, next){
                 res.redirect('/dashboard')
             }
             else {
-                res.status(401).send('Invalid password');
+                // If the passwords do not match, show error message
+                return res.render('login.ejs', { message: ['Username or Password is incorrect'] });
             }
         })
     })

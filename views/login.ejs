@@ -16,6 +16,14 @@
             <a href="register">Register</a>
         </nav>
 
+        <% if (message && message.length > 0) { %>
+            <ul style="color: red;">
+                <% message.forEach(msg => { %>
+                    <li><%= msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
         <form method="POST" action="loggedin">
             <p>Username: <input id="username" type="text" name="username"/></p>
             <p>Password: <input id="password" type="text" name="password"/></p>
