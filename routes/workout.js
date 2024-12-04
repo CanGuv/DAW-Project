@@ -85,7 +85,7 @@ router.get('/search_result', redirectLogin, function (req, res, next) {
     let userId = req.session.userId
 
     // Get the workout type from the query string
-    let workoutType = req.query.workoutType.toLowerCase()
+    let workoutType = req.sanitize(req.query.workoutType.toLowerCase())
 
     // SQL query to select data
     let sqlQuery = "SELECT w.workout_type, we.exercise_name FROM Workouts w JOIN Workout_Exercises we ON w.workout_id = we.workout_id WHERE w.user_id = ? AND LOWER(w.workout_type) = ?"

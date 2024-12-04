@@ -25,10 +25,10 @@
         <% } %>
 
         <form method="POST" action="registered">
-            <p>Email: <input id="email" type="text" name="email" required/></p>
-            <p>Username: <input id="username" type="text" name="username" required/></p>
-            <p>Password: <input id="password" type="text" name="password" required/></p>
-            <p>Age: <input id="age" type="text" name="age" required/></p>
+            <p>Email: <input id="email" type="text" name="email" value="<%= email %>" required/></p>
+            <p>Username: <input id="username" type="text" name="username" value="<%= username %>" required/></p>
+            <p>Password: <input id="password" type="password" name="password" value="<%= password %>" required/></p>
+            <p>Age: <input id="age" type="text" name="age" value="<%= age %>" required/></p>
             <p>Gender: 
                 <select id="gender" name="gender" required>
                     <option value="" disabled selected>Select your gender</option>
@@ -37,8 +37,8 @@
                     <option value="other">Other</option>
                 </select>
             </p>
-            <p>Height (cm): <input id="height" type="text" name="height" required/></p>
-            <p>Weight (kg): <input id="weight" type="text" name="weight" required/></p>
+            <p>Height (cm): <input id="height" type="text" name="height" value="<%= height %>" required/></p>
+            <p>Weight (kg): <input id="weight" type="text" name="weight" value="<%= weight %>" required/></p>
             <input type="submit" value="Register" />
           </form>
     </body>

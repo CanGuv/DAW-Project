@@ -76,6 +76,16 @@ form input[type="text"], form select {
     color: #333;
 }
 
+form input[type="password"], form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #333;
+}
+
 form select {
     padding: 10px;
     font-size: 1em;
@@ -83,6 +93,12 @@ form select {
 
 /* Focus and active styles for form inputs */
 form input[type="text"]:focus, form select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+form input[type="password"]:focus, form select:focus {
     border-color: #3498db;
     outline: none;
     box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);

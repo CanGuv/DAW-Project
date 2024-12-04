@@ -8,10 +8,11 @@ const { check, validationResult } = require('express-validator')
 
 // Import the bcrypt library
 const bcrypt = require('bcrypt')
+const { head } = require("request")
 const saltRounds = 10 // Number of salt rounds for password hashing
 
 router.get('/register', function (req, res) {
-    res.render('register.ejs', { message: ''} )                                                               
+    res.render('register.ejs', { message: '', email: '', username: '', password: '', age: '', height: '', weight: ''} )                                                               
 })
 
 // Route handler to process user registration with validation rules
@@ -28,12 +29,13 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
     check('gender').notEmpty().withMessage('Gender is required')], 
     function (req, res, next) {
         // Sanitize user input
-        req.body.username = req.sanitize(req.body.username);
-        req.body.email = req.sanitize(req.body.email);
-        req.body.gender = req.sanitize(req.body.gender)
-        req.body.age = req.sanitize(req.body.age)
-        req.body.height = req.sanitize(req.body.height)
-        req.body.weight = req.sanitize(req.body.weight)
+        email = req.sanitize(req.body.email)
+        username = req.sanitize(req.body.username)
+        password = req.sanitize(req.body.password)
+        gender = req.sanitize(req.body.gender)
+        age = req.sanitize(req.body.age)
+        height = req.sanitize(req.body.height)
+        weight = req.sanitize(req.body.weight)
         
         // Validate the sanitized input and handle errors
         const errors = validationResult(req);
@@ -42,22 +44,22 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
             const errorMessages = errors.array().map(err => err.msg);
         
             // Render the register page with the errors
-            return res.render('register.ejs', { message: errorMessages });
+            return res.render('register.ejs', { message: errorMessages, email: email, username: username, password: password, age: age, height: height, weight: weight });
         }
         else { 
-            const plainPassword = req.body.password
+            const plainPassword = password
 
             // Check if username is already in the database
             const usernameCheck = 'SELECT COUNT(*) AS count FROM users WHERE username = ?';
 
-            db.query(usernameCheck, [req.body.username], (err, results) => {
+            db.query(usernameCheck, [username], (err, results) => {
                 if (err) {
                     return next(err);
                 }
     
                 if (results[0].count > 0) {
                     // If username already exists, show error message
-                    return res.render('register.ejs', { message: ['Username already exists. Please pick another one'] });
+                    return res.render('register.ejs', { message: ['Username already exists. Please pick another one'], email: email, username: '', password: password, age: age, height: height, weight: weight});
                 }
 
                 // Hash the user's password
@@ -70,7 +72,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                     let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
                     // Get the data from the request body
-                    let data = [req.body.username, req.body.email, hashedPassword, req.body.age, req.body.gender, req.body.height, req.body.weight];
+                    let data = [username, email, hashedPassword, age, gender, height, weight];
 
                     // Execute the query and handle the result
                     db.query(sqlquery, data, (err, results) => {
@@ -86,12 +88,13 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
     })
 
 router.get('/login', function (req, res){
-    res.render('login.ejs', { message: ''} )
+    res.render('login.ejs', { message: '', username: ''} )
 })
 
 router.post('/loggedin', function (req, res, next){
     // Get the data from the request body
-    const { username, password } = req.body;
+    const username = req.sanitize(req.body.username)
+    const password = req.sanitize(req.body.password)
 
     // SQL query to get user data
     let sqlquery = "SELECT password_hash, user_id FROM Users WHERE username = ?"; 
@@ -105,7 +108,7 @@ router.post('/loggedin', function (req, res, next){
 
         // Check if the username exists in the database
         if (results.length === 0) {
-            return res.render('login.ejs', { message: ['Username or Password is incorrect'] });
+            return res.render('login.ejs', { message: ['Username is incorrect'], username: '' });
         }
 
         // Retrieve the hashed password
@@ -123,7 +126,7 @@ router.post('/loggedin', function (req, res, next){
             }
             else {
                 // If the passwords do not match, show error message
-                return res.render('login.ejs', { message: ['Username or Password is incorrect'] });
+                return res.render('login.ejs', { message: ['Password is incorrect'], username: username });
             }
         })
     })
