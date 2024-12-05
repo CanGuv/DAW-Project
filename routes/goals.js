@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator')
 // Middleware function to redirect users to login
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
-      res.redirect('/auth/login')
+      res.redirect('/auth/login');
     } else { 
         next ();
     } 
@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
     // Get userID from session
     let userId = req.session.userId
     // SQL query to get user data
-    let sqlQuery = "SELECT * FROM Goals WHERE user_id = ?"
+    let sqlQuery = "SELECT * FROM Goals WHERE user_id = ?";
 
     // Execute the query and handle the result
     db.query(sqlQuery, [userId], (err, results) => {
@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
             next(err)
         }
 
-        res.render("goals.ejs", { goals: results, user: userId })
+        res.render("goals.ejs", { goals: results, user: userId });
     });
 });
 
@@ -36,7 +36,7 @@ router.post('/addgoal', redirectLogin, function (req, res) {
     let userId = req.session.userId
 
     // SQL query to get user data
-    let sqlquery = "INSERT INTO goals (user_id, goal_type, start_date, end_date, status) VALUES (?, ?, ?, ?, ?)"
+    let sqlquery = "INSERT INTO goals (user_id, goal_type, start_date, end_date, status) VALUES (?, ?, ?, ?, ?)";
 
     // Get the data from the request body
     let data = [userId, req.sanitize(req.body.goaltype), req.sanitize(req.body.startyear) + "-" + req.sanitize(req.body.startmonth) + "-" + req.sanitize(req.body.startday), 
@@ -51,7 +51,7 @@ router.post('/addgoal', redirectLogin, function (req, res) {
         else {
             res.send('Added, congrats!!')
         }
-    })
+    });
 });
 
 module.exports = router;

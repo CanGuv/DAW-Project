@@ -13,7 +13,7 @@ const saltRounds = 10 // Number of salt rounds for password hashing
 
 router.get('/register', function (req, res) {
     res.render('register.ejs', { message: '', email: '', username: '', password: '', age: '', height: '', weight: ''} )                                                               
-})
+});
 
 // Route handler to process user registration with validation rules
 router.post('/registered', [check('email').isEmail().withMessage('Please enter a valid email address').notEmpty().withMessage('Email is required'), 
@@ -83,14 +83,14 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
 
                         res.redirect('/auth/login')
                     });
-                })
-            })
-        }
-    })
+                });
+            });
+        };
+    });
 
 router.get('/login', function (req, res){
     res.render('login.ejs', { message: '', username: ''} )
-})
+});
 
 router.post('/loggedin', function (req, res, next){
     // Get the data from the request body
@@ -129,9 +129,9 @@ router.post('/loggedin', function (req, res, next){
                 // If the passwords do not match, show error message
                 return res.render('login.ejs', { message: ['Password is incorrect'], username: username });
             }
-        })
-    })
-})
+        });
+    });
+});
 
 router.get('/logout', function (req, res) {
     // Destroy the user's session
@@ -140,7 +140,7 @@ router.get('/logout', function (req, res) {
           return res.send("error in destroying session")
         }
         res.redirect("/")
-    })
-})
+    });
+});
 
 module.exports = router

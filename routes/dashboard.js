@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', function (req, res) {
     // Get userID from session
-    let userId = req.session.userId;
+    let userId = req.session.userId
 
     // SQL query to get the user data
     let goalsQuery = "SELECT * FROM Goals WHERE user_id = ?";
