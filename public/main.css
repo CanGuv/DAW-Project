@@ -1,13 +1,9 @@
-/* main.css */
-
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Set up the font family */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f7f6;
@@ -26,7 +22,6 @@ p {
     margin: 10px 0;
 }
 
-/* Link styling */
 a {
     color: #2980b9;
     text-decoration: none;
@@ -37,7 +32,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Container for the content */
 body {
     display: flex;
     flex-direction: column;
@@ -45,12 +39,10 @@ body {
     justify-content: center;
 }
 
-/* Adding some padding and center alignment */
 h1, p {
     text-align: center;
 }
 
-/* Adding spacing and shadows */
 p a {
     display: inline-block;
     margin: 10px;

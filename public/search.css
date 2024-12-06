@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f7f6;
@@ -13,27 +12,25 @@ body {
     text-align: center;
 }
 
-/* Styling for the main heading */
 h1 {
     color: #2c3e50;
     font-size: 2.5em;
     margin-top: 20px;
 }
 
-/* Navbar styling */
 .navbar {
     display: flex;
     justify-content: center;
-    background-color: #3498db; /* You can adjust the color if needed */
-    padding: 15px 0; /* Matches the 'about.css' padding */
+    background-color: #3498db;
+    padding: 15px 0;
     margin-bottom: 20px;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
-    padding: 14px 20px; /* Matches the 'about.css' padding */
-    font-size: 1.1em; /* Matches the 'about.css' font-size */
+    padding: 14px 20px;
+    font-size: 1.1em;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
@@ -42,10 +39,9 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensure navbar links are aligned horizontally */
 .navbar a {
     display: inline-block;
-    margin: 0 10px; /* Adjust margin to maintain consistent spacing */
+    margin: 0 10px;
 }
 
 p {
@@ -56,7 +52,7 @@ p {
 
 form {
     width: 95%;
-    max-width: 800px; /* Increase max-width for a larger form */
+    max-width: 800px;
     margin: 30px auto;
     padding: 30px;
     background-color: #fff;
@@ -71,14 +67,14 @@ form p {
 }
 
 form select, 
-form input[type="text"], /* Target the text input */
+form input[type="text"],
 form input[type="submit"] {
     width: 100%;
-    padding: 15px; /* Increase padding for larger input boxes */
+    padding: 15px;
     margin-top: 10px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 16px; /* Increase font size for better readability */
+    font-size: 16px;
     box-sizing: border-box;
 }
 

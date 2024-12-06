@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get("/api", function(req, res, next){
     // SQL query to get data from the database
-    let sqlquery = "SELECT DISTINCT LOWER(exercise_name) AS exercise_name FROM Workout_Exercises;";
+    let sqlquery = "SELECT DISTINCT LOWER(exercise_name) AS exercise_name FROM Workout_Exercises";
 
     // Execute the query and handle the result
     db.query(sqlquery, (err, result) => {

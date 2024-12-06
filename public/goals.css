@@ -1,4 +1,3 @@
-/* General styles */
 * {
     margin: 0;
     padding: 0;
@@ -30,20 +29,19 @@ p {
     font-size: 16px;
 }
 
-/* Navbar styles */
 .navbar {
     display: flex;
     justify-content: center;
-    background-color: #3498db; /* You can adjust the color if needed */
-    padding: 15px 0; /* Matches the 'about.css' padding */
+    background-color: #3498db;
+    padding: 15px 0;
     margin-bottom: 20px;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
-    padding: 14px 20px; /* Matches the 'about.css' padding */
-    font-size: 1.1em; /* Matches the 'about.css' font-size */
+    padding: 14px 20px;
+    font-size: 1.1em;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
@@ -52,39 +50,17 @@ p {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensure navbar links are aligned horizontally */
 .navbar a {
     display: inline-block;
-    margin: 0 10px; /* Adjust margin to maintain consistent spacing */
-}
-/* .navbar {
-    display: flex;
-    justify-content: center;
-    background-color: #0077b6;
-    padding: 10px 0;
+    margin: 0 10px;
 }
 
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.navbar a:hover {
-    color: #caf0f8;
-} */
-
-/* Goals text */
 .goals-text {
     text-align: center;
     margin: 20px 0;
     font-size: 18px;
 }
 
-/* Table styles */
 table {
     width: 90%;
     margin: 20px auto;
@@ -113,7 +89,6 @@ table tr:nth-child(even) {
     background-color: #f1f1f1;
 }
 
-/* Form styles */
 form {
     width: 90%;
     max-width: 600px;
