@@ -85,7 +85,7 @@
                         <option value="<%= day %>"><%= day %></option>
                     <% } %>
                 </select>
-                <select id="workoutmonth" name="workout" required>
+                <select id="workoutmonth" name="workoutmonth" required>
                     <option value="" disabled selected>Month</option>
                     <% for (let month = 1; month <= 12; month++) { %>
                         <option value="<%= month %>"><%= month %></option>
@@ -100,10 +100,10 @@
             </p>
 
             <h2>Exercises</h2>
-            <p>Name: <input type="text" name="exercisename" required/></p>
+            <p>Name: <input type="text" name="exercise_name" required/></p>
             <p>Sets: <input type="text" name="sets" required/></p>
             <p>Reps: <input type="text" name="reps" required/></p>
-            <p>Weight (kg): <input type="text" name="weight-kg" required/></p>
+            <p>Weight (kg): <input type="text" name="weight_kg" required/></p>
 
             <input type="submit" value="Add" />
 

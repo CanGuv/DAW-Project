@@ -94,9 +94,9 @@
         
                 // Categorize goals by status
                 const goalCounts = {
-                    completed: goalsData.filter(g => g.status === 'Completed').length,
-                    inProgress: goalsData.filter(g => g.status === 'In Progress').length,
-                    failed: goalsData.filter(g => g.status === 'Failed').length,
+                    completed: goalsData.filter(g => g.status === 'Completed' && new Date(g.start_date).getFullYear() === new Date().getFullYear()).length,
+                    inProgress: goalsData.filter(g => g.status === 'In Progress' && new Date(g.start_date).getFullYear() === new Date().getFullYear()).length,
+                    failed: goalsData.filter(g => g.status === 'Failed' && new Date(g.start_date).getFullYear() === new Date().getFullYear()).length,
                 };
 
                 // Create Pie Chart
@@ -105,7 +105,7 @@
                     data: {
                         labels: ['Completed', 'In Progress', 'Failed'],
                         datasets: [{
-                            label: 'Goals Status',
+                            label: 'Goals Status For ' + new Date().getFullYear(),
                             data: [goalCounts.completed, goalCounts.inProgress, goalCounts.failed],
                             backgroundColor: ['#4CAF50', '#FFC107', '#F44336']
                         }]
@@ -126,7 +126,9 @@
 
                 // Populate set with workout dates
                 workoutData.forEach(workout => {
-                    uniqueWorkoutDates.add(workout.workout_date);
+                    if(new Date(workout.workout_date).getFullYear() === new Date().getFullYear()){
+                        uniqueWorkoutDates.add(workout.workout_date);
+                    }
                 });
 
                 // Create array of months, incrememnting by 1 for every workout for each month
@@ -150,7 +152,7 @@
                     data: {
                         labels: monthLabels,
                         datasets: [{
-                            label: "Workout Days Per Month",
+                            label: "Workout Days Per Month For Year " + new Date().getFullYear(),
                             data: monthlyWorkoutCounts,
                             backgroundColor: barColours
                         }]

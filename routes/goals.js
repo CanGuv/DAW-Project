@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
     // Get userID from session
     let userId = req.session.userId
     // SQL query to get user data
-    let sqlQuery = "SELECT * FROM Goals WHERE user_id = ?";
+    let sqlQuery = "SELECT * FROM Goals WHERE user_id = ? ORDER BY start_date DESC";
 
     // Execute the query and handle the result
     db.query(sqlQuery, [userId], (err, results) => {

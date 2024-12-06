@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
     // Get userID from session
     let userId = req.session.userId
     // SQL query to get user data
-    let sqlQuery = "SELECT  w.workout_type, w.duration_minutes, w.intensity, w.calories_burned, w.workout_date, we.exercise_name, we.sets, we.reps, we.weight_kg FROM Workouts w LEFT JOIN Workout_Exercises we ON w.workout_id = we.workout_id WHERE  w.user_id = ?";
+    let sqlQuery = "SELECT  w.workout_type, w.duration_minutes, w.intensity, w.calories_burned, w.workout_date, we.exercise_name, we.sets, we.reps, we.weight_kg FROM Workouts w LEFT JOIN Workout_Exercises we ON w.workout_id = we.workout_id WHERE  w.user_id = ? ORDER BY w.workout_date DESC";
 
     // Execute the query and handle the result
     db.query(sqlQuery, [userId], (err, results) => {
@@ -67,9 +67,9 @@ router.post('/log', redirectLogin, function (req, res, next)  {
 
             let workoutId = result.insertId;
 
-            let exerciseInsertQuery = "INSERT INTO WorkoutExercises (workout_id, exercise_name, sets, reps, weight_kg) VALUES (?, ?, ?, ?)";
+            let exerciseInsertQuery = "INSERT INTO Workout_Exercises (workout_id, exercise_name, sets, reps, weight_kg) VALUES (?, ?, ?, ?, ?)";
 
-            db.query(exerciseInsertQuery, [workoutId, exercisename, sets, reps, weight_kg], (err, result) => {
+            db.query(exerciseInsertQuery, [workoutId, exercise_name, sets, reps, weight_kg], (err, result) => {
                 if (err) {
                     return next(err)
                 }
