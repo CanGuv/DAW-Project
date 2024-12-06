@@ -51,7 +51,7 @@ router.post('/log', redirectLogin, function (req, res, next)  {
     // Validate the sanitized input and handle errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        res.redirect('/log'); }
+        res.redirect('/workout'); }
     else { 
         // Formatting of Date
         let workout_date = workoutyear + "-" + workoutmonth + "-" + workoutday
