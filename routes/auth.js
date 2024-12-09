@@ -70,7 +70,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                     }
 
                     // SQL to insert data
-                    let sqlquery = `INSERT INTO users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+                    let sqlquery = `INSERT INTO Users (username, email, password_hash, age, gender, height_cm, weight_kg) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
                     // Get the data from the request body
                     let data = [username, email, hashedPassword, age, gender, height, weight];
