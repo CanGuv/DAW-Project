@@ -51,7 +51,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
             const plainPassword = password
 
             // Check if username is already in the database
-            const usernameCheck = 'SELECT COUNT(*) AS count FROM users WHERE username = ?';
+            const usernameCheck = 'SELECT COUNT(*) AS count FROM Users WHERE username = ?';
 
             db.query(usernameCheck, [username], (err, results) => {
                 if (err) {
