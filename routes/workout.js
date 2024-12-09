@@ -80,7 +80,7 @@ router.post('/log', redirectLogin, function (req, res, next)  {
     };
 });
 
-router.get('/search',function(req, res, next){
+router.get('/search', function(req, res, next){
     // Get userID from session
     let userId = req.session.userId
     res.render("search.ejs", {user: userId});
