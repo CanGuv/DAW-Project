@@ -9,7 +9,7 @@ const { check, validationResult } = require('express-validator')
 // Middleware function to redirect users to login
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
-      res.redirect('/auth/login');
+      res.redirect('/usr/757/auth/login');
     } else { 
         next ();
     } 
@@ -74,7 +74,7 @@ router.post('/log', redirectLogin, function (req, res, next)  {
                     return next(err)
                 }
 
-                res.redirect('/workout');
+                res.redirect('/usr/757/workout');
             });
         });
     };
