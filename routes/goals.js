@@ -6,7 +6,7 @@ const router = express.Router()
 // Middleware function to redirect users to login
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId ) {
-      res.redirect('/auth/login');
+      res.redirect('/usr/757/auth/login');
     } else { 
         next ();
     } 
@@ -46,7 +46,7 @@ router.post('/addgoal', redirectLogin, function (req, res, next) {
             next(err)
         }
         else {
-            res.redirect('/goals')
+            res.redirect('/usr/757/goals')
         }
     });
 });
