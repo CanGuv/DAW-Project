@@ -81,7 +81,7 @@ router.post('/registered', [check('email').isEmail().withMessage('Please enter a
                             return next(err);
                         }
 
-                        res.redirect('/auth/login')
+                        res.redirect('/usr/757/auth/login')
                     });
                 });
             });
@@ -123,7 +123,7 @@ router.post('/loggedin', function (req, res, next){
             else if (result === true) {
                 // Store the user's ID in the session
                 req.session.userId = results[0].user_id
-                res.redirect('/dashboard')
+                res.redirect('/usr/757/dashboard')
             }
             else {
                 // If the passwords do not match, show error message
@@ -139,7 +139,7 @@ router.get('/logout', function (req, res) {
         if (err) {
           return res.send("error in destroying session")
         }
-        res.redirect("/")
+        res.redirect("/usr/757/")
     });
 });
 
