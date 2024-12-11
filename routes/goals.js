@@ -33,7 +33,7 @@ router.post('/addgoal', redirectLogin, function (req, res, next) {
     let userId = req.session.userId
 
     // SQL query to get user data
-    let sqlquery = "INSERT INTO goals (user_id, goal_type, start_date, end_date, status) VALUES (?, ?, ?, ?, ?)";
+    let sqlquery = "INSERT INTO Goals (user_id, goal_type, start_date, end_date, status) VALUES (?, ?, ?, ?, ?)";
 
     // Get the data from the request body
     let data = [userId, req.body.goaltype, req.body.startyear + "-" + req.body.startmonth + "-" + req.body.startday, 
