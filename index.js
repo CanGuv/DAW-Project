@@ -37,20 +37,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 
 // Define the database connection
-const db = mysql.createConnection ({
+const pool = mysql.createPool({
     host: 'localhost',
     user: 'fitnesshealth_app',
     password: 'qwertyuiop',
-    database: 'fitnesshealth'
-})
-// Connect to the database
-db.connect((err) => {
-    if (err) {
-        throw err
-    }
-    console.log('Connected to database')
-})
-global.db = db
+    database: 'fitnesshealth',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+
+global.db = pool;
 
 // Define application-specific data
 app.locals.fitnessData = {mainName: "Fitness and Health Tracker"}
